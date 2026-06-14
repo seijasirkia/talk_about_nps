@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NPS: A Statistician's Perspective</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css">
+  <style>
+    .reveal h1 { font-size: 1.8em; }
+    .reveal h2 { font-size: 1.4em; }
+    .reveal .citation { font-style: italic; font-size: 0.7em; color: #aaa; }
+    .reveal .highlight { color: #e7ad52; }
+    .reveal .dim { color: #888; }
+    .reveal .formula { font-family: monospace; background: #1a1a2e; padding: 0.5em 1em; border-radius: 4px; display: inline-block; }
+  </style>
+</head>
+<body>
+<div class="reveal">
+  <div class="slides">
+
+    <!-- ═══════════════════════════════════════════
+         ACT 0 — TITLE
+    ═══════════════════════════════════════════ -->
+    <section data-markdown><textarea data-template>
+## NPS: A Statistician's Perspective
+
+### The One Number You Need to Know
+#### is more complicated than that
+
+<br>
+*[Your name] · [Conference name] · 2026*
+    </textarea></section>
+
+    <!-- ═══════════════════════════════════════════
+         ACT 1 — TEAR IT DOWN
+    ═══════════════════════════════════════════ -->
+
+    <section data-markdown><textarea data-template>
+## "The One Number You Need to Know"
+
+*Harvard Business Review, 2003*
+
+> "…the single most reliable indicator of
+> a company's ability to grow."
+
+<br>
+<span class="dim">— Frederick Reichheld</span>
+    </textarea></section>
+
+    <section data-markdown><textarea data-template>
+## Bold claim.
+
+## What does it actually mean?
+    </textarea></section>
+
+    <section data-markdown><textarea data-template>
+## The NPS Recipe
+
+1. Ask: *"How likely are you to recommend us?"* (0–10)
+2. Label respondents: Detractors (0–6) · Passives (7–8) · Promoters (9–10)
+3. Compute: **NPS = %Promoters − %Detractors**
+
+<br>
+Result: a number between −100 and +100
+    </textarea></section>
+
+    <section data-markdown><textarea data-template>
+## The Information Loss Stack
+
+```
+11-point scale      →   3 buckets   →   1 number
+    (rich)              (lossy)         (context-free)
+```
+
+<br>
+And yet: companies live or die by this number.
+    </textarea></section>
+
+    <section data-markdown><textarea data-template>
+## In Isolation, It's Noise
+
+- Is 32 good or bad? <!-- Depends entirely on your industry, your baseline, your sample -->
+- Are your respondents comparable across time?
+- How large is your sample?
+- Are you measuring at the same moment in the journey?
+
+<br>
+A single NPS number, without context, tells you almost nothing.
+    </textarea></section>
+
+    <!-- ═══════════════════════════════════════════
+         ACT 2 — BUT WAIT, IT'S A REAL STATISTIC
+    ═══════════════════════════════════════════ -->
+
+    <section data-markdown><textarea data-template>
+## Here's the thing.
+
+## NPS is actually a statistic.
+
+## A real one.
+    </textarea></section>
+
+    <section data-markdown><textarea data-template>
+## What NPS Is, Mathematically
+
+NPS is a linear combination of **skewness** and **kurtosis** of the rating distribution.
+
+<br>
+
+*Not intuition. Not vibes. Shape of a distribution.*
+
+<!-- TODO: add the exact formula / derivation here -->
+    </textarea></section>
+
+    <section data-markdown><textarea data-template>
+## Skewness: Which Way Does the Mass Lean?
+
+*[diagram: left-skewed vs symmetric vs right-skewed distribution on a 0–10 scale]*
+
+A promoter-heavy product → right-skewed
+A detractor-heavy product → left-skewed
+    </textarea></section>
+
+    <section data-markdown><textarea data-template>
+## Kurtosis: Where Are the Extremes?
+
+*[diagram: peaked vs flat distribution]*
+
+High kurtosis → strong opinions in the tails
+Low kurtosis → respondents cluster in the middle (passives)
+    </textarea></section>
+
+    <section data-markdown><textarea data-template>
+## So NPS Captures:
+
+- **Direction** of sentiment (skewness)
+- **Intensity** of sentiment (kurtosis)
+
+In a single number. That's not nothing.
+
+<!-- The magic is in knowing WHAT it encodes, not treating it as oracle -->
+    </textarea></section>
+
+    <!-- ═══════════════════════════════════════════
+         ACT 3 — WHEN IT WORKS
+    ═══════════════════════════════════════════ -->
+
+    <section data-markdown><textarea data-template>
+## When Does It Actually Work?
+
+Three conditions:
+
+1. **Scale** — enough respondents for the statistic to stabilize
+2. **Comparability** — same question, same moment in the journey, consistent framing
+3. **Benchmark** — a reference point, internal or industry
+
+Without all three: interesting noise.
+With all three: **signal.**
+    </textarea></section>
+
+    <section data-markdown><textarea data-template>
+## Evidence from HappySignals
+
+*[TODO: add specific data / chart here]*
+
+- What we measured
+- What the benchmark revealed
+- What changed when conditions weren't met
+    </textarea></section>
+
+    <section data-markdown><textarea data-template>
+## What the Data Showed
+
+*[TODO: the juicy part — concrete example from your work]*
+    </textarea></section>
+
+    <!-- ═══════════════════════════════════════════
+         ACT 4 — TAKEAWAYS
+    ═══════════════════════════════════════════ -->
+
+    <section data-markdown><textarea data-template>
+## Takeaways
+
+1. NPS alone is **not** "the one number" — context is not optional
+2. But NPS is **not** arbitrary — it encodes real distributional information
+3. Use it like a statistician:
+   - Report *n*
+   - Compare against a benchmark
+   - Track over time, not as a snapshot
+
+    </textarea></section>
+
+    <section data-markdown><textarea data-template>
+## The Right Question Is Not
+
+> "What is our NPS?"
+
+## It's
+
+> "What does our NPS distribution tell us,
+> compared to what and measured how?"
+    </textarea></section>
+
+    <section data-markdown><textarea data-template>
+## Thank You
+
+<br>
+
+*[Your name]*
+*[HappySignals / your handle / email]*
+
+<br>
+Questions?
+    </textarea></section>
+
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/markdown/markdown.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    slideNumber: 'c/t',
+    plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+  });
+</script>
+</body>
+</html>
