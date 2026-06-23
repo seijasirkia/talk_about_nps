@@ -25,13 +25,24 @@
          ACT 0 — TITLE
     ═══════════════════════════════════════════ -->
     <section data-markdown><textarea data-template>
-## NPS: A Statistician's Perspective
-
-### The One Number You Need to Know
-#### is more complicated than that
+## Net Promoter Score -
+## Not Proper data Science?
 
 <br>
-*[Your name] · [Conference name] · 2026*
+Seija Sirkiä · PyData Helsinki · June 2026
+    </textarea></section>
+    <section data-markdown><textarea data-template>
+## About me
+
+- PhD in statistics 2007
+- Academia-ish until 2017
+    - Counting trees
+    - Maintaining R on a supercluster
+- Data scientist until 2022
+    - Consulting & product startups
+    - Including HappySignals
+- Freelancer data engineer 
+    - Microsoft, OP Pohjola, Supercell
     </textarea></section>
 
     <!-- ═══════════════════════════════════════════
@@ -39,7 +50,7 @@
     ═══════════════════════════════════════════ -->
 
     <section data-markdown><textarea data-template>
-## "The One Number You Need to Know"
+## "One Number You Need to Grow"
 
 *Harvard Business Review, 2003*
 
@@ -55,14 +66,14 @@
       <!-- Drop your image file into the assets/ folder and update the src -->
     </section>
 
-    <section data-markdown><textarea data-template>
-## Bold claim.
 
-## What does it actually mean?
-    </textarea></section>
+    <section>
+      <img src="assets/NetPromoterScore-NPS.png" style="height: 60%;" alt="NPS formula diagram">
+      <small style="font-size: 0.4em; color: #888;">By <a href="//commons.wikimedia.org/wiki/User:Bquast" title="User:Bquast">Bquast</a> - <span class="int-own-work" lang="en">Own work</span>, <a href="https://creativecommons.org/licenses/by/4.0" title="Creative Commons Attribution 4.0">CC BY 4.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=146395734">Link</a></small>
+    </section>
 
     <section data-markdown><textarea data-template>
-## The NPS Recipe
+## The NPS Formula
 
 1. Ask: *"How likely are you to recommend us?"* (0–10)
 2. Label respondents: Detractors (0–6) · Passives (7–8) · Promoters (9–10)
@@ -70,157 +81,156 @@
 
 <br>
 Result: a number between −100 and +100
-    </textarea></section>
-
-    <section data-markdown><textarea data-template>
-## The Information Loss Stack
-
-```
-11-point scale      →   3 buckets   →   1 number
-    (rich)              (lossy)         (context-free)
-```
-
 <br>
-And yet: companies live or die by this number.
+<span style="color: #e74c3c; font-weight: bold;">Not a percentage!</span>
+
     </textarea></section>
 
     <section data-markdown><textarea data-template>
-## In Isolation, It's Noise
+## Not a percentage!
 
-- Is 32 good or bad? <!-- Depends entirely on your industry, your baseline, your sample -->
-- Are your respondents comparable across time?
-- How large is your sample?
-- Are you measuring at the same moment in the journey?
+- Consider: 65% yay, 15% boo, 20% meh 
+    - Result: 50, or 50%?
+    - What is half of what here?
+- Consider: -15
+    - -15% implies a change or difference between two cases. What two?
+- Compare with CSAT: Actually the % of 4s and 5s out of 1 to 5
+    </textarea></section>
 
+    <section data-markdown><textarea data-template>
+## Better calculation
+
+1. Map: 0-6 → -1, 7-8 → 0, 9-10 → 1
+2. Take the average (& multiply by 100)
 <br>
-A single NPS number, without context, tells you almost nothing.
-    </textarea></section>
-
-    <!-- ═══════════════════════════════════════════
-         ACT 2 — BUT WAIT, IT'S A REAL STATISTIC
-    ═══════════════════════════════════════════ -->
-
-    <section data-markdown><textarea data-template>
-## Here's the thing.
-
-## NPS is actually a statistic.
-
-## A real one.
+- Easy to do in SQL or similar
+- Is actually a real *skewness* statistic
+- Since it is an average you can:
+    - combine several by just weighting
+    - use t-test to compare groups *but please don't*
     </textarea></section>
 
     <section data-markdown><textarea data-template>
-## What NPS Is, Mathematically
+## Recap
 
-NPS is a linear combination of **skewness** and **kurtosis** of the rating distribution.
+- Asking people to rate their experience on a numerical scale:
+    - sensible though ambiguous and unreliable
+- Summarising those answers as a single number:
+    - essential
+- Claiming a certain scale and a certain statistic is magical:
+    - dubious
 
+    </textarea></section>
+
+    <section data-markdown><textarea data-template>
+## You need a benchmark
+
+- A single NPS score in isolation means *nothing*
+- Only difference to a *comparable* case means *something*
+    - your past, your locales, your competitors
+- Comparability is rare because *anything* counts as *something*
+    - Sampled populations shift too
+
+    </textarea></section>
+
+    <section data-markdown><textarea data-template>
+## HappySignals benchmark data
+- NPS style survey after an IT support ticket is closed
+    - Also Lost time, and Factors, and a Profile
+    - Also metadata
+- Responses coming from global corporations, collectively operating all over the world
+- A clear country effect exists, creating a need for country benchmarks
+    - Direct observation of pooled responses is unreliable
+
+    </textarea></section>
+
+    <section data-markdown><textarea data-template>
+## Corrected country benchmark model
+- output var: 3-level multinomial
+- 2 input vars: country and company 1-hot encoded
+- linear prediction, logit link
+- calculate fits for Happiness (NPS) from the fitted multinomial probs
+    </textarea></section>
+
+    <section data-markdown><textarea data-template>
+## Reparametrization
+- Standard methods for the fitted model give "predictions" (fits) for company S in country T
+    - useful e.g. for a company to find where to improve
+- Country benchmark should be the fit for "an average company"
+    - there is no such thing, the model object won't directly give that
+- Reparametrize manually!
+    </textarea></section>
+
+    <section data-markdown><textarea data-template>
+## Interlude: Math!
+- Consider continuous output var Y and one 2-level categorical predictor X
+    - i.e. group A and group B
+- The least squares predictions / fits for Y<sub>A</sub> and Y<sub>B</sub> is going to be....?
+    </textarea></section>
+
+    <section data-markdown><textarea data-template>
+## Interlude: Math!
+- Consider continuous output var Y and one 2-level categorical predictor X
+    - i.e. group A and group B
+- The least squares predictions / fits for Y<sub>A</sub> and Y<sub>B</sub> is going to be the average in each group
+- But you can parametrize your model in various ways
+    </textarea></section>
+
+    <section data-markdown><textarea data-template>
+## Interlude: Math!
+
+- Y = α + βX<sub>B</sub> where X<sub>B</sub> is indicator f for B
+     - α becomes avg in A, β the difference between avgs
+- Y = β<sub>A</sub>X<sub>A</sub> + β<sub>B</sub>X<sub>B</sub>
+     - βs become the avgs directly
+- Y = α + βX<sub>A</sub> - βX<sub>B</sub>
+     - α becomes the midpoint between the avgs
+     - my "average" case!
+    </textarea></section>
+
+    <section data-markdown><textarea data-template>
+## Anecdote 1: shift left
+
+- shift left here means moving routine tasks to "tier 0" support, i.e. outside the ticketing system
+- like password resetting
+- password resets are common, and easy to solve nice and fast
+    - good experience!
+- What happens to your NPS if you pull this off?
+    - and what to the quality of your service?
+    </textarea></section>
+
+    <section data-markdown><textarea data-template>
+## Anecdote 2: A natural experiment
+
+- There are two types of tickets: incidents and requests
+- They have almost identical surveys, except incidents have a factor "my ticket was not solved"
+- One (major) client misconfigured their integration and requests also got this option
+- Guess if people feel that requests can go unsolved?
+    </textarea></section>
+
+    <section data-markdown><textarea data-template>
+## Anecdote 3: Robot clicks!
+- Sidenote: "why are you data people so keen on batching??"
+- Emails are scanned to catch malicious content before they hit the inbox
+- This means the score buttons (links) are clicked by a robot, not the intended human
+- We sort this problem by adding buttons only a robot would click
+</textarea></section>
+
+    <section data-markdown><textarea data-template>
+## Anecdote 4: "More smiles, less time wasted"
+- The survey also asks for Lost Time
+    - This is the money maker, actually
+- Clearly correlates with Happiness
+- Sales wanted to know *how much* Lost Time goes down as Happiness improves
+    - "Uhhh.... 40 minutes per ticket per point (per year)?"
+
+</textarea></section>
+
+    <section data-markdown><textarea data-template>
+linkedin.com/in/seija/
 <br>
-
-*Not intuition. Not vibes. Shape of a distribution.*
-
-<!-- TODO: add the exact formula / derivation here -->
+github.com/seijasirkia/talk_about_nps
     </textarea></section>
-
-    <section data-markdown><textarea data-template>
-## Skewness: Which Way Does the Mass Lean?
-
-*[diagram: left-skewed vs symmetric vs right-skewed distribution on a 0–10 scale]*
-
-A promoter-heavy product → right-skewed
-A detractor-heavy product → left-skewed
-    </textarea></section>
-
-    <section data-markdown><textarea data-template>
-## Kurtosis: Where Are the Extremes?
-
-*[diagram: peaked vs flat distribution]*
-
-High kurtosis → strong opinions in the tails
-Low kurtosis → respondents cluster in the middle (passives)
-    </textarea></section>
-
-    <section data-markdown><textarea data-template>
-## So NPS Captures:
-
-- **Direction** of sentiment (skewness)
-- **Intensity** of sentiment (kurtosis)
-
-In a single number. That's not nothing.
-
-<!-- The magic is in knowing WHAT it encodes, not treating it as oracle -->
-    </textarea></section>
-
-    <!-- ═══════════════════════════════════════════
-         ACT 3 — WHEN IT WORKS
-    ═══════════════════════════════════════════ -->
-
-    <section data-markdown><textarea data-template>
-## When Does It Actually Work?
-
-Three conditions:
-
-1. **Scale** — enough respondents for the statistic to stabilize
-2. **Comparability** — same question, same moment in the journey, consistent framing
-3. **Benchmark** — a reference point, internal or industry
-
-Without all three: interesting noise.
-With all three: **signal.**
-    </textarea></section>
-
-    <section data-markdown><textarea data-template>
-## Evidence from HappySignals
-
-*[TODO: add specific data / chart here]*
-
-- What we measured
-- What the benchmark revealed
-- What changed when conditions weren't met
-    </textarea></section>
-
-    <section data-markdown><textarea data-template>
-## What the Data Showed
-
-*[TODO: the juicy part — concrete example from your work]*
-    </textarea></section>
-
-    <!-- ═══════════════════════════════════════════
-         ACT 4 — TAKEAWAYS
-    ═══════════════════════════════════════════ -->
-
-    <section data-markdown><textarea data-template>
-## Takeaways
-
-1. NPS alone is **not** "the one number" — context is not optional
-2. But NPS is **not** arbitrary — it encodes real distributional information
-3. Use it like a statistician:
-   - Report *n*
-   - Compare against a benchmark
-   - Track over time, not as a snapshot
-
-    </textarea></section>
-
-    <section data-markdown><textarea data-template>
-## The Right Question Is Not
-
-> "What is our NPS?"
-
-## It's
-
-> "What does our NPS distribution tell us,
-> compared to what and measured how?"
-    </textarea></section>
-
-    <section data-markdown><textarea data-template>
-## Thank You
-
-<br>
-
-*[Your name]*
-*[HappySignals / your handle / email]*
-
-<br>
-Questions?
-    </textarea></section>
-
   </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
