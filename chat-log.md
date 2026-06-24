@@ -21,20 +21,3 @@ Answers: Net Promoter Score · Conference/meetup · Reveal.js
 
 Built first-draft `index.html` with Reveal.js via CDN. Slides scaffold with TODO stubs for: exact formula/derivation, skewness/kurtosis diagrams, HappySignals data, speaker name and conference details.
 
----
-
-**Me:** Can we embed pictures in the slides?
-
-**Claude:** Yes. Recommended approach: `assets/` folder with relative paths in `<img>` tags. Alternatively inline base64 for a self-contained single file, but harder to edit.
-
----
-
-**Me:** yes, but put the tags in a new slide right after the first slide
-
-**Claude:** Created `assets/` folder. Added a plain `<section>` slide (not Markdown) right after the title slide with a placeholder `<img>` tag.
-
----
-
-**Me:** I want to save this chat up to this point in the repo as well.
-
-*(This file.)*
